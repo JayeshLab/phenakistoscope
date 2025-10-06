@@ -5,11 +5,12 @@ interface PresetImage {
   name: string;
   url: string;
   thumbnail: string;
+  speed: number;
 }
 
 interface ImageSelectorProps {
   presetImages: PresetImage[];
-  onImageSelect: (imageUrl: string) => void;
+  onImageSelect: (imageUrl: string, speed: number) => void;
   onFileUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
   selectedImage: string;
 }
@@ -23,7 +24,7 @@ function ImageSelector({ presetImages, onImageSelect, onFileUpload, selectedImag
         {presetImages.map((image) => (
           <button
             key={image.id}
-            onClick={() => onImageSelect(image.url)}
+            onClick={() => onImageSelect(image.url, image.speed)}
             className={`relative overflow-hidden rounded-lg transition-all duration-200 ${
               selectedImage === image.url
                 ? 'ring-4 ring-blue-500 shadow-lg shadow-blue-500/50'

@@ -7,9 +7,13 @@ function App() {
   const [selectedImage, setSelectedImage] = useState<string>(presetImages[0].url);
   const [isRotating, setIsRotating] = useState(true);
   const [rotationSpeed, setRotationSpeed] = useState(200);
+  const min: number = 20;
+  const max: number = 900;
+  const step: number = 10;
 
-  const handleImageSelect = (imageUrl: string) => {
+  const handleImageSelect = (imageUrl: string, speed: number) => {
     setSelectedImage(imageUrl);
+    setRotationSpeed(speed);
   };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,16 +76,16 @@ function App() {
                   </label>
                   <input
                     type="range"
-                    min="60"
-                    max="400"
-                    step="20"
+                    min={ min }
+                    max={ max }
+                    step={ step }
                     value={rotationSpeed}
                     onChange={(e) => setRotationSpeed(parseInt(e.target.value))}
                     className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
                   />
                   <div className="flex justify-between text-xs text-slate-400 mt-1">
-                    <span>Fast (60ms)</span>
-                    <span>Slow (400ms)</span>
+                    <span>Fast ({min}ms)</span>
+                    <span>Slow ({max}ms)</span>
                   </div>
                 </div>
               </div>
